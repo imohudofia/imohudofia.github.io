@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Udofia Imohette Wisdom — Digital Specialist & Executive Assistant</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #0a0e1a;
+      --surface:   #111827;
+      --surface2:  #1a2236;
+      --accent:    #38bdf8;
+      --accent2:   #818cf8;
+      --green:     #34d399;
+      --text:      #e2e8f0;
+      --muted:     #94a3b8;
+      --border:    rgba(255,255,255,0.07);
+      --nav-h:     68px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h);
+      background: rgba(10,14,26,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+    }
+    .nav-inner {
+      max-width: 1100px; width: 100%; margin: 0 auto;
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 1.3rem; font-weight: 800; letter-spacing: 1px;
+      color: var(--accent); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.9rem;
+      font-weight: 500; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--muted); transition: all .3s;
+    }
+    .mobile-menu {
+      display: none; position: fixed; top: var(--nav-h); left: 0; right: 0;
+      background: var(--surface); padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border); z-index: 99;
+      flex-direction: column; gap: 1.2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--text); text-decoration: none; font-size: 1rem;
+      font-weight: 500; padding: 0.4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800; margin-bottom: 3rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .section-title::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .section-title span { color: var(--accent); }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; padding-top: calc(var(--nav-h) + 2rem);
+      max-width: 1100px; margin: 0 auto; padding-left: 2rem; padding-right: 2rem;
+    }
+    .hero-greeting {
+      font-size: 1.1rem; color: var(--accent); font-weight: 600;
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .hero-name {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 900; line-height: 1.1; margin-bottom: 0.6rem;
+    }
+    .hero-name .highlight { color: var(--accent); }
+    .hero-typed-wrap {
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      color: var(--muted); font-weight: 500; min-height: 2.2rem;
+      margin-bottom: 1.6rem;
+    }
+    .typed-cursor { color: var(--accent); animation: blink 0.8s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .hero-bio {
+      max-width: 680px; color: var(--muted); font-size: 1rem; margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.6rem; border-radius: 8px;
+      font-weight: 600; font-size: 0.95rem; text-decoration: none;
+      transition: all .25s; cursor: pointer; border: none;
+    }
+    .btn-primary {
+      background: var(--accent); color: #0a0e1a;
+    }
+    .btn-primary:hover { background: #7dd3fc; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(56,189,248,.3); }
+    .btn-outline {
+      background: transparent; color: var(--accent);
+      border: 1.5px solid var(--accent);
+    }
+    .btn-outline:hover { background: rgba(56,189,248,.1); transform: translateY(-2px); }
+    .hero-stats {
+      display: flex; gap: 2.5rem; margin-top: 4rem; flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 2rem; font-weight: 800; color: var(--accent); }
+    .stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;
+    }
+    .about-text p { color: var(--muted); margin-bottom: 1.2rem; line-height: 1.8; }
+    .about-text p strong { color: var(--text); }
+    .about-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .about-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.2rem; text-align: center;
+      transition: border-color .2s, transform .2s;
+    }
+    .about-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .about-card .num { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
+    .about-card .label { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+    .cert-badges { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .badge {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 0.35rem 0.9rem;
+      font-size: 0.8rem; color: var(--accent); font-weight: 500;
+    }
+
+    /* ── SKILLS ── */
+    #skills { background: none; }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;
+    }
+    .skill-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.5rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .skill-card:hover { border-color: var(--accent2); transform: translateY(-3px); }
+    .skill-card h3 {
+      font-size: 0.95rem; font-weight: 700; color: var(--text);
+      margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .skill-card h3 .icon { font-size: 1.2rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 6px; padding: 0.3rem 0.7rem;
+      font-size: 0.78rem; color: var(--muted);
+      transition: all .2s;
+    }
+    .tag:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── EXPERIENCE ── */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px; background: var(--border);
+    }
+    .timeline-item { position: relative; margin-bottom: 3rem; }
+    .timeline-dot {
+      position: absolute; left: -2.45rem; top: 0.35rem;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--accent); border: 3px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .timeline-date {
+      font-size: 0.8rem; color: var(--accent); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem;
+    }
+    .timeline-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .timeline-company { color: var(--accent2); font-weight: 600; font-size: 0.95rem; margin-bottom: 0.8rem; }
+    .timeline-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem;
+      transition: border-color .2s;
+    }
+    .timeline-card:hover { border-color: var(--accent); }
+    .timeline-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .timeline-card ul li {
+      color: var(--muted); font-size: 0.9rem; padding-left: 1.2rem;
+      position: relative; line-height: 1.6;
+    }
+    .timeline-card ul li::before {
+      content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 0.8rem;
+    }
+    .timeline-card ul li strong { color: var(--text); }
+
+    /* ── SERVICES ── */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.8rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .service-card:hover { border-color: var(--green); transform: translateY(-4px); }
+    .service-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .service-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── CONTACT ── */
+    #contact { text-align: center; }
+    .contact-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 3rem; max-width: 680px; margin: 0 auto;
+    }
+    .contact-box p { color: var(--muted); margin-bottom: 2rem; line-height: 1.8; font-size: 1rem; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 0.8rem 1.2rem;
+      color: var(--text); text-decoration: none; font-size: 0.9rem;
+      transition: all .2s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .contact-link svg { flex-shrink: 0; }
+    .contact-avail {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(52,211,153,.1); border: 1px solid rgba(52,211,153,.3);
+      border-radius: 20px; padding: 0.4rem 1rem;
+      font-size: 0.85rem; color: var(--green);
+    }
+    .dot-green {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--green); animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(0.8)} }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); text-align: center;
+      padding: 2rem; color: var(--muted); font-size: 0.85rem;
+    }
+    footer span { color: var(--accent); }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .about-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; }
+    }
+    @media (max-width: 500px) {
+      .about-cards { grid-template-columns: 1fr 1fr; }
+      section { padding: 80px 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAVIGATION ══ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">UIW</a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="closeMenu()">Home</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#skills" onclick="closeMenu()">Skills</a>
+  <a href="#experience" onclick="closeMenu()">Experience</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section id="home">
+  <p class="hero-greeting">👋 Welcome to my portfolio</p>
+  <h1 class="hero-name">
+    Udofia Imohette<br><span class="highlight">Wisdom</span>
+  </h1>
+  <div class="hero-typed-wrap">
+    <span id="typed"></span><span class="typed-cursor">|</span>
+  </div>
+  <p class="hero-bio">
+    Results-driven <strong>Digital Specialist &amp; Executive Assistant</strong> with <strong>7+ years</strong> of remote experience delivering digital solutions, operational support, and administrative excellence to clients across the <strong>US, UK, and Europe</strong>. Fully autonomous, highly organised, and available across <strong>any time zone</strong>.
+  </p>
+  <div class="hero-cta">
+    <a href="#contact" class="btn btn-primary">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Get In Touch
+    </a>
+    <a href="#experience" class="btn btn-outline">View Experience</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">7+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">20+</div>
+      <div class="stat-label">Clients Served</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">45%</div>
+      <div class="stat-label">Team Productivity ↑</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">60%</div>
+      <div class="stat-label">Response Time ↑</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">🌍</div>
+      <div class="stat-label">Any Time Zone</div>
+    </div>
+  </div>
+  <div style="margin-top:2rem; display:flex; flex-wrap:wrap; gap:0.6rem;">
+    <span style="background:rgba(56,189,248,.1); border:1px solid rgba(56,189,248,.3); border-radius:20px; padding:0.35rem 1rem; font-size:0.82rem; color:var(--accent);">🕐 US Time Zones (EST / PST)</span>
+    <span style="background:rgba(56,189,248,.1); border:1px solid rgba(56,189,248,.3); border-radius:20px; padding:0.35rem 1rem; font-size:0.82rem; color:var(--accent);">🕑 UK &amp; Europe (GMT / CET)</span>
+    <span style="background:rgba(56,189,248,.1); border:1px solid rgba(56,189,248,.3); border-radius:20px; padding:0.35rem 1rem; font-size:0.82rem; color:var(--accent);">⚡ Fully Remote · 100% Autonomous</span>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <h2 class="section-title"><span>#</span> About Me</h2>
+  <div class="about-grid fade-up">
+    <div class="about-text">
+      <p>
+        I'm a <strong>Digital Specialist and Executive Assistant</strong> with a passion for using technology to solve real problems. My work spans website development, social media management, IT support, project coordination, and high-level executive assistance — all delivered 100% remotely, with precision and zero supervision required.
+      </p>
+      <p>
+        Over the past seven years I've supported professionals and businesses across <strong>healthcare, education, and B2B sectors</strong> — setting up digital systems, streamlining workflows, managing communications, and consistently delivering results that move the needle.
+      </p>
+      <p>
+        I work comfortably across <strong>US, UK, and European time zones</strong>, adapt quickly to new tools and environments, and bring genuine commitment to every client engagement. Whether it's running a busy executive's operations or building a brand's entire online presence — I get it done, wherever you are.
+      </p>
+      <div class="cert-badges">
+        <span class="badge">🏆 HubSpot Inbound Marketing Certified</span>
+        <span class="badge">📋 LinkedIn Project Management Foundations</span>
+        <span class="badge">📈 Google Digital Marketing (In Progress)</span>
+      </div>
+    </div>
+    <div>
+      <div class="about-cards">
+        <div class="about-card">
+          <div class="num">7+</div>
+          <div class="label">Years Remote Experience</div>
+        </div>
+        <div class="about-card">
+          <div class="num">20+</div>
+          <div class="label">Clients &amp; Projects</div>
+        </div>
+        <div class="about-card">
+          <div class="num">500+</div>
+          <div class="label">Monthly Visitors Generated</div>
+        </div>
+        <div class="about-card">
+          <div class="num">40%</div>
+          <div class="label">Interview Rate Increase</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SKILLS ══ -->
+<section id="skills">
+  <h2 class="section-title"><span>#</span> Skills &amp; Tools</h2>
+  <div class="skills-grid">
+
+    <div class="skill-card fade-up">
+      <h3><span class="icon">🌐</span> Web &amp; Digital</h3>
+      <div class="tags">
+        <span class="tag">Website Development</span>
+        <span class="tag">Website Management</span>
+        <span class="tag">UI/UX Awareness</span>
+        <span class="tag">Landing Pages</span>
+        <span class="tag">E-commerce Sites</span>
+      </div>
+    </div>
+
+    <div class="skill-card fade-up">
+      <h3><span class="icon">📣</span> Marketing &amp; Content</h3>
+      <div class="tags">
+        <span class="tag">Copywriting</span>
+        <span class="tag">Sales Writing</span>
+        <span class="tag">Email Marketing</span>
+        <span class="tag">Social Media Ads</span>
+        <span class="tag">Digital Marketing</span>
+        <span class="tag">Content Strategy</span>
+      </div>
+    </div>
+
+    <div class="skill-card fade-up">
+      <h3><span class="icon">📱</span> Social Media</h3>
+      <div class="tags">
+        <span class="tag">Social Media Management</span>
+        <span class="tag">Content Creation</span>
+        <span class="tag">Follower Growth</span>
+        <span class="tag">Brand Visibility</span>
+        <span class="tag">Engagement Strategies</span>
+      </div>
+    </div>
+
+    <div class="skill-card fade-up">
+      <h3><span class="icon">🗂️</span> Project Management</h3>
+      <div class="tags">
+        <span class="tag">Asana</span>
+        <span class="tag">Trello</span>
+        <span class="tag">Slack</span>
+        <span class="tag">Google Workspace</span>
+        <span class="tag">Microsoft Office Suite</span>
+        <span class="tag">Task Delegation</span>
+      </div>
+    </div>
+
+    <div class="skill-card fade-up">
+      <h3><span class="icon">💼</span> Executive Support</h3>
+      <div class="tags">
+        <span class="tag">Calendar Management</span>
+        <span class="tag">Inbox Triaging</span>
+        <span class="tag">Travel Logistics</span>
+        <span class="tag">Meeting Coordination</span>
+        <span class="tag">Document Management</span>
+        <span class="tag">Research &amp; Reporting</span>
+      </div>
+    </div>
+
+    <div class="skill-card fade-up">
+      <h3><span class="icon">💻</span> IT &amp; Tech</h3>
+      <div class="tags">
+        <span class="tag">IT Support &amp; Troubleshooting</span>
+        <span class="tag">Software Installation</span>
+        <span class="tag">Email System Setup</span>
+        <span class="tag">AI Tool Integration</span>
+        <span class="tag">E-Learning Platforms</span>
+        <span class="tag">Data Entry</span>
+      </div>
+    </div>
+
+    <div class="skill-card fade-up">
+      <h3><span class="icon">🎨</span> Creative</h3>
+      <div class="tags">
+        <span class="tag">Graphics Design</span>
+        <span class="tag">Video Editing</span>
+        <span class="tag">Promotional Content</span>
+        <span class="tag">Branding Elements</span>
+        <span class="tag">Flyers &amp; Banners</span>
+      </div>
+    </div>
+
+    <div class="skill-card fade-up">
+      <h3><span class="icon">📊</span> Admin &amp; Operations</h3>
+      <div class="tags">
+        <span class="tag">Scheduling Optimization</span>
+        <span class="tag">Customer Support</span>
+        <span class="tag">Record Maintenance</span>
+        <span class="tag">Vendor Coordination</span>
+        <span class="tag">Budget Management</span>
+        <span class="tag">Report Preparation</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ EXPERIENCE ══ -->
+<section id="experience">
+  <h2 class="section-title"><span>#</span> Experience</h2>
+  <div class="timeline">
+
+    <div class="timeline-item fade-up">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Feb 2019 – Present</div>
+      <div class="timeline-card">
+        <div class="timeline-title">IT Specialist / Operations Executive</div>
+        <div class="timeline-company">Stemz Healthcare Nigeria · Remote Contract · Healthcare Sector</div>
+        <ul>
+          <li>Managed executive calendars and coordinated <strong>60+ monthly</strong> cross-departmental meetings and patient appointments, proactively resolving scheduling conflicts.</li>
+          <li>Crafted graphics and edited promotional videos while managing IT infrastructure and social media — achieving a <strong>25% increase in patient engagement</strong>.</li>
+          <li>Set up company email systems and trained staff on productivity tools like Slack, resulting in a <strong>60% improvement</strong> in response time across departments.</li>
+          <li>Coordinated project tasks using Asana and Trello, <strong>increasing team productivity by 45%</strong> through standardized workflow processes.</li>
+          <li>Arranged domestic travel and transport logistics for patients attending out-of-town treatments.</li>
+          <li>Provided ongoing IT support for troubleshooting software and managing digital tools to prevent operational disruptions.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-up">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">July 2022 – Sept 2025</div>
+      <div class="timeline-card">
+        <div class="timeline-title">Executive Assistant</div>
+        <div class="timeline-company">Andrew Madumizi · Private Client · Remote Contract · UK-Based</div>
+        <ul>
+          <li>Managed complex email correspondence and document submissions for high-stakes UK visa and university applications, triaging <strong>50+ weekly emails</strong> with zero missed deadlines.</li>
+          <li>Coordinated end-to-end scheduling for interviews, university admissions, and follow-up meetings across multiple timezones with <strong>100% attendance reliability</strong>.</li>
+          <li>Prepared tailored CVs and cover letters that <strong>increased job interview rate by 40%</strong>, leading to successful job placement.</li>
+          <li>Streamlined visa application workflows, achieving a <strong>30% faster processing time</strong> through improved document management and communication protocols.</li>
+          <li>Organized comprehensive digital filing systems for sensitive documents — achieving instant retrieval and zero data errors.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-up">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Aug 2018 – Present</div>
+      <div class="timeline-card">
+        <div class="timeline-title">Digital Specialist &amp; IT Consultant</div>
+        <div class="timeline-company">Freelance · Independent Contractor · Remote · Global Clients across Healthcare, Education &amp; B2B</div>
+        <ul>
+          <li>Designed and developed websites for 20+ clients — user-friendly, functional, and maintained for ongoing performance.</li>
+          <li>Led email system creation and management using Google Workspace, triaging high-volume inboxes and maintaining perfect response protocols.</li>
+          <li>Developed websites and social media strategies resulting in a <strong>40% increase in client engagement</strong> and <strong>30% improvement in conversions</strong> over 4 months.</li>
+          <li>Launched multiple personal projects including e-commerce sites and digital content platforms, gaining <strong>500+ monthly visitors</strong> in the first 3 months.</li>
+          <li>Designed and implemented Asana/Trello project management systems for executive teams, ensuring 100% task completion and deadline adherence.</li>
+          <li>Created and managed E-learning systems for clients, facilitating remote education and training.</li>
+          <li>Executed digital marketing campaigns including email marketing and social media ads to drive customer acquisition.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ SERVICES ══ -->
+<section id="services">
+  <h2 class="section-title"><span>#</span> What I Do</h2>
+  <div class="services-grid">
+
+    <div class="service-card fade-up">
+      <div class="service-icon">🖥️</div>
+      <h3>Website Design &amp; Management</h3>
+      <p>End-to-end website creation, development, and ongoing maintenance. I build clean, functional, and user-friendly sites that represent your brand professionally online.</p>
+    </div>
+
+    <div class="service-card fade-up">
+      <div class="service-icon">📅</div>
+      <h3>Executive &amp; Virtual Assistance</h3>
+      <p>Calendar management, inbox triaging, travel coordination, meeting scheduling, research, and document management — all with zero supervision and perfect follow-through.</p>
+    </div>
+
+    <div class="service-card fade-up">
+      <div class="service-icon">📱</div>
+      <h3>Social Media Management</h3>
+      <p>Strategy, content creation, scheduling, and community engagement. I grow your brand's presence and drive measurable increases in reach and follower engagement.</p>
+    </div>
+
+    <div class="service-card fade-up">
+      <div class="service-icon">✍️</div>
+      <h3>Copywriting &amp; Content</h3>
+      <p>Persuasive email copy, landing pages, social media ads, and CVs/cover letters — written to convert, engage, and leave a lasting impression.</p>
+    </div>
+
+    <div class="service-card fade-up">
+      <div class="service-icon">🛠️</div>
+      <h3>IT Support &amp; Setup</h3>
+      <p>Software troubleshooting, email system setup (Google Workspace), staff training, project management tool implementation, and AI tool integration.</p>
+    </div>
+
+    <div class="service-card fade-up">
+      <div class="service-icon">🎬</div>
+      <h3>Graphics &amp; Video Editing</h3>
+      <p>Eye-catching graphics, promotional videos, flyers, banners, and branding elements — tailored for your marketing campaigns and social media presence.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <h2 class="section-title"><span>#</span> Get In Touch</h2>
+  <div class="contact-box fade-up">
+    <div class="contact-avail" style="margin-bottom:1.5rem;">
+      <span class="dot-green"></span> Available for new opportunities
+    </div>
+    <p>
+      I'm open to new projects, long-term remote roles, and executive support opportunities with teams across the <strong>US, UK, and Europe</strong>. I work across time zones, adapt quickly, and hit the ground running — no handholding needed. If you need someone dependable who delivers, let's connect.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:imohudofia.va@gmail.com" class="contact-link">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        imohudofia.va@gmail.com
+      </a>
+      <a href="tel:+2348114530431" class="contact-link">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.21 15a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 4h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 11.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +234 811 453 0431
+      </a>
+      <a href="tel:+2348148052449" class="contact-link">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.21 15a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 4h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 11.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +234 814 805 2449
+      </a>
+      <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn Profile
+      </a>
+    </div>
+    <p style="font-size:0.82rem; color:var(--muted);">🌍 Remote · Available Globally &nbsp;·&nbsp; US · UK · Europe &nbsp;·&nbsp; Any Time Zone</p>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <p>Designed &amp; built by <span>Udofia Imohette Wisdom</span> · <span>2025</span></p>
+  <p style="margin-top:0.4rem; font-size:0.78rem;">Remote · Available Globally · Any Time Zone</p>
+</footer>
+
+<script>
+  // ── Typed Effect ──
+  const phrases = [
+    'Digital Specialist',
+    'Executive Assistant',
+    'IT Specialist',
+    'Social Media Manager',
+    'Virtual Assistant',
+    'Project Coordinator',
+  ];
+  let pi = 0, ci = 0, deleting = false;
+  const el = document.getElementById('typed');
+
+  function type() {
+    const word = phrases[pi];
+    if (!deleting) {
+      el.textContent = word.slice(0, ++ci);
+      if (ci === word.length) { deleting = true; return setTimeout(type, 1800); }
+    } else {
+      el.textContent = word.slice(0, --ci);
+      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+    }
+    setTimeout(type, deleting ? 55 : 90);
+  }
+  setTimeout(type, 600);
+
+  // ── Mobile Menu ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  function closeMenu() { mobileMenu.classList.remove('open'); }
+
+  // ── Scroll Fade Animations ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ── Active Nav Link ──
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+    });
+  });
+</script>
+</body>
+</html>
